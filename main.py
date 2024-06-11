@@ -29,7 +29,6 @@ def verificar_normalidad(ruta_excel, hoja, columna):
     else:
         print("Los datos no siguen una distribución normal (se rechaza H0).")
 
-    # Visualización
     # Histograma + curva normal teórica
     # Valores de la media (mu) y desviación típica (sigma) de los datos
     mu, sigma = stats.norm.fit(data)
