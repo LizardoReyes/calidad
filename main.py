@@ -1,6 +1,7 @@
 import pandas as pd
 import scipy.stats as stats
 import statsmodels.api as sm
+import numpy as np
 import matplotlib.pyplot as plt
 import os
 
@@ -29,10 +30,23 @@ def verificar_normalidad(ruta_excel, hoja, columna):
         print("Los datos no siguen una distribución normal (se rechaza H0).")
 
     # Visualización
-    # Histograma
-    plt.hist(data, bins=30, color='lightblue', edgecolor='black')
-    plt.title('Histograma')
-    plt.show()
+    # Histograma + curva normal teórica
+    # Valores de la media (mu) y desviación típica (sigma) de los datos
+    mu, sigma = stats.norm.fit(data)
+
+    # Valores teóricos de la normal en el rango observado
+    x_hat = np.linspace(min(data), max(data), num=100)
+    y_hat = stats.norm.pdf(x_hat, mu, sigma)
+
+    # Gráfico
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(x_hat, y_hat, linewidth=2, label='normal')
+    ax.hist(x=data, density=True, bins=30, color="#3182bd", alpha=0.5)
+    ax.plot(data, np.full_like(data, -0.01), '|k', markeredgewidth=1)
+    ax.set_title('Distribución peso mujeres mayores de 15 años')
+    ax.set_xlabel('peso')
+    ax.set_ylabel('Densidad de probabilidad')
+    ax.legend()
 
     # Gráfico Q-Q
     sm.qqplot(data, line='s')
