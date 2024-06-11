@@ -9,10 +9,11 @@ import os
 def verificar_normalidad(ruta_excel, hoja, columna):
     # Leer el archivo Excel
     df = pd.read_excel(ruta_excel, sheet_name=hoja)
+    # print(df.head())
 
     # Seleccionar la columna de datos
     data = df[columna].dropna()  # Asegúrate de manejar los valores NaN si existen
-    print(data)
+    # print(data)
 
     # Prueba de Shapiro-Wilk
     stat, p_value = stats.shapiro(data)
@@ -55,7 +56,60 @@ def verificar_normalidad(ruta_excel, hoja, columna):
 
 if __name__ == '__main__':
     verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'Tamaño Panes', 'Tamaño 1')
+                         'PanesDefecto', 'Croissant')
 
     verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'Tamaño Panes', 'Tamaño 2')
+                         'PanesDefecto', 'Cachito relleno')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Pizza')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Enrollado de canela')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Karamanducas')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Pan de yema')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Empanadas de boda')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Enrollados de hot dog')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PanesDefecto', 'Enrollado de jamón y queso')
+
+
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Croissant')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Cachito relleno')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Pizza')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Enrollado de canela')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Karamanducas')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Pan de yema')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Empanadas de boda')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Enrollados de hot dog')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Enrollado de jamón y queso')
+
+    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
+                         'PerdidaPan', 'Enrollado de jamón y queso')
