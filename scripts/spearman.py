@@ -22,6 +22,6 @@ def spearman(df):
 
 if __name__ == '__main__':
     # Leer el archivo Excel
-    df = pd.read_excel(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'), sheet_name='PanesDefecto')
+    df = pd.read_excel(os.path.join(os.getcwd(), '../datos/', 'archivo.xlsx'), sheet_name='PanesDefecto')
     # print(df.head())
     spearman(df)

@@ -10,14 +10,14 @@ from statsmodels.formula.api import ols
 
 def anova_1_factor(df):
     # Calculamos medias
-    #print(f'\nMedias')
-    #print(df.mean())
+    print(f'\nMedias\n-----------------------------------------')
+    print(df.mean())
     # Calculamos desviaciones
-    #print(f'\nDesviaciones')
-    #print(df.std())
+    print(f'\nDesviaciones\n-----------------------------------------')
+    print(df.std())
 
     # Anova de 1 factor
-    print(f'Anova de 1 factor')
+    print(f'\nAnova de 1 factor')
     anova_result = stats.f_oneway(df['Croissant'], df['Cachito relleno'], df['Pizza'], df['Enrollado de canela'],
                                   df['Karamanducas'], df['Pan de yema'], df['Empanadas de boda'],
                                   df['Enrollados de hot dog'], df['Enrollado de jamón y queso'])

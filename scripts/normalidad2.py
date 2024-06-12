@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+
 def verificar_normalidad_2(ruta_excel, hoja):
     # Leer el archivo Excel
     df = pd.read_excel(ruta_excel, sheet_name=hoja)
@@ -31,10 +32,13 @@ def verificar_normalidad_2(ruta_excel, hoja):
         resultados.append([columna, stat_ks, p_value_ks, resultado_ks])
 
     # Crear un DataFrame con los resultados
-    resultados_df = pd.DataFrame(resultados, columns=["Columna", "Kolmogorov-Smirnov Estadístico", "Kolmogorov-Smirnov p-valor", "Resultado Kolmogorov-Smirnov"])
+    resultados_df = pd.DataFrame(resultados,
+                                 columns=["Columna", "Kolmogorov-Smirnov Estadístico", "Kolmogorov-Smirnov p-valor",
+                                          "Resultado Kolmogorov-Smirnov"])
 
     # Imprimir la tabla de resultados
     print(resultados_df)
+
 
 def graficar(data):
     # Histograma + curva normal teórica
@@ -60,11 +64,12 @@ def graficar(data):
     plt.title('Gráfico Q-Q')
     plt.show()
 
+
 if __name__ == '__main__':
     # Verificar normalidad y graficar para las hojas especificadas
     print('\nVerificación de normalidad para PanesDefecto')
-    verificar_normalidad_2(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
+    verificar_normalidad_2(os.path.join(os.getcwd(), '../datos/', 'archivo.xlsx'), 'PanesDefecto')
 
     # Para verificar la hoja 'PerdidaPan', descomentar la siguiente línea:
     #print('\nVerificación de normalidad para PerdidaPan')
-    #verificar_normalidad_2(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PerdidaPan')
+    #verificar_normalidad_2(os.path.join(os.getcwd(), '../datos/', 'archivo.xlsx'), 'PerdidaPan')
