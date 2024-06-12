@@ -1,115 +1,46 @@
 import pandas as pd
-import scipy.stats as stats
-import statsmodels.api as sm
-import numpy as np
-import matplotlib.pyplot as plt
+
 import os
 
-
-def verificar_normalidad(ruta_excel, hoja, columna):
-    # Leer el archivo Excel
-    df = pd.read_excel(ruta_excel, sheet_name=hoja)
-    # print(df.head())
-
-    # Seleccionar la columna de datos
-    data = df[columna].dropna()  # Asegúrate de manejar los valores NaN si existen
-    # print(data)
-
-    # Prueba de Shapiro-Wilk
-    stat, p_value = stats.shapiro(data)
-    print(f'Estadístico Shapiro-Wilk: {stat}, valor-p: {p_value}')
-
-    if data.size > 20:
-        # D'Agostino's K-squared test
-        stat, p_value = stats.normaltest(data)
-        print(f'Estadístico D\'Agostino\'s: {stat}, valor-p: {p_value}')
-
-    # Interpretar el resultado
-    if p_value > 0.05:
-        print("Los datos parecen seguir una distribución normal (se acepta H0).")
-    else:
-        print("Los datos no siguen una distribución normal (se rechaza H0).")
-
-    # Histograma + curva normal teórica
-    # Valores de la media (mu) y desviación típica (sigma) de los datos
-    mu, sigma = stats.norm.fit(data)
-
-    # Valores teóricos de la normal en el rango observado
-    x_hat = np.linspace(min(data), max(data), num=100)
-    y_hat = stats.norm.pdf(x_hat, mu, sigma)
-
-    # Gráfico
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.plot(x_hat, y_hat, linewidth=2, label='normal')
-    ax.hist(x=data, density=True, bins=30, color="#3182bd", alpha=0.5)
-    ax.plot(data, np.full_like(data, -0.01), '|k', markeredgewidth=1)
-    ax.set_title('Distribución peso mujeres mayores de 15 años')
-    ax.set_xlabel('peso')
-    ax.set_ylabel('Densidad de probabilidad')
-    ax.legend()
-
-    # Gráfico Q-Q
-    sm.qqplot(data, line='s')
-    plt.title('Gráfico Q-Q')
-    plt.show()
-
+from scripts.anova_1_factor import anova_1_factor
+from scripts.anova_1_factor_2 import anova_1_factor_2
+from scripts.kruskal_wallis import prueba_kruskal
+from scripts.normalidad import verificar_normalidad
+from scripts.normalidad2 import verificar_normalidad_2
 
 if __name__ == '__main__':
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Croissant')
 
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Cachito relleno')
+    '''
+    # Prueba de normalidad Shapiro-Wilk
+    print("\nPrueba de normalidad Shapiro-Wilk\n")
+    verificar_normalidad(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
+    # Prueba de normalidad Kolmogorov-Smirnov
+    print("\nPrueba de normalidad Kolmogorov-Smirnov\n")
+    verificar_normalidad_2(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
 
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Pizza')
+    # Prueba de kruskal wallis
+    print("\nPrueba de Kruskal-Wallis")
+    prueba_kruskal(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
+    '''
+        # Prueba de Anova 1 factor 2
+    ruta_excel = os.path.join(os.getcwd(), './datos/', 'archivo.xlsx')
 
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Enrollado de canela')
+    # Realizar el ANOVA para cada hoja
+    #anova_1_factor_2(ruta_excel, 'PanesDefecto')
+    anova_1_factor_2(ruta_excel, 'PerdidaPan')
 
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Karamanducas')
+    # Prueba de Anova 1 factor
+    print("\nPrueba de Anova 1 factor")
+    df = pd.read_excel(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), sheet_name='PerdidaPan')
+    anova_1_factor(df)
+    '''
 
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Pan de yema')
+    ### SEGUNDO ###
 
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Empanadas de boda')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Enrollados de hot dog')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PanesDefecto', 'Enrollado de jamón y queso')
-
-
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Croissant')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Cachito relleno')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Pizza')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Enrollado de canela')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Karamanducas')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Pan de yema')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Empanadas de boda')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Enrollados de hot dog')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Enrollado de jamón y queso')
-
-    verificar_normalidad(os.path.join(os.getcwd(), 'datos/', 'archivo.xlsx'),
-                         'PerdidaPan', 'Enrollado de jamón y queso')
+    # Prueba de normalidad Shapiro-Wilk
+    print("\nPrueba de normalidad Shapiro-Wilk\n")
+    verificar_normalidad(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PerdidaPan')
+    # Prueba de normalidad Kolmogorov-Smirnov
+    print("\nPrueba de normalidad Kolmogorov-Smirnov\n")
+    verificar_normalidad_2(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PerdidaPan')
+    '''
