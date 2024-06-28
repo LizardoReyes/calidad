@@ -15,15 +15,15 @@ def verificar_normalidad_2(ruta_excel, hoja):
 
     # Iterar sobre todas las columnas de la hoja
     for columna in df.columns:
-        # Seleccionar la columna de datos
-        data = df[columna].dropna()  # Asegúrate de manejar los valores NaN si existen
+        # Seleccionar la columna de datos y eliminar NaN
+        data = df[columna].dropna()
 
         if data.empty:
             resultados.append([columna, "La columna está vacía o solo contiene valores NaN.", "", ""])
             continue
 
         # Prueba de Kolmogorov-Smirnov
-        stat_ks, p_value_ks = stats.kstest(data, 'norm', args=(data.mean(), data.std()))
+        stat_ks, p_value_ks = stats.kstest(data, 'norm', args=(data.mean(), data.std(ddof=1)))
 
         # Interpretar el resultado
         resultado_ks = "Normal" if p_value_ks > 0.05 else "No Normal"

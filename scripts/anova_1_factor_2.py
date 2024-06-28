@@ -4,7 +4,7 @@ from scipy import stats
 import statsmodels.api as sm
 from statsmodels.formula.api import ols
 import statsmodels.stats.multicomp as mc
-
+import matplotlib.pyplot as plt
 
 def anova_1_factor_2(ruta_excel, hoja):
     # Leer el archivo Excel
@@ -44,6 +44,12 @@ def anova_1_factor_2(ruta_excel, hoja):
     print(f'\nComparaciones múltiples post-hoc (Tukey HSD):')
     print(tukey_resultado)
 
+    # Gráfico de las comparaciones múltiples post-hoc (Tukey HSD)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    tukey_resultado.plot_simultaneous(ax=ax)
+    ax.axvline(x=0, color='grey', linestyle='--')
+    plt.title(f'Comparaciones múltiples post-hoc (Tukey HSD) para {hoja}')
+    plt.show()
 
 if __name__ == '__main__':
     # Ruta al archivo Excel

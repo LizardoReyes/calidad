@@ -68,8 +68,8 @@ if __name__ == '__main__':
 
     # PARTE 1
     print('\n')
-    verificar_normalidad(os.path.join(os.getcwd(), '../datos/', 'archivo.xlsx'), 'PanesDefecto')
+    verificar_normalidad(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
 
     # PARTE 2
     print('\n')
-    verificar_normalidad(os.path.join(os.getcwd(), '../datos/', 'archivo.xlsx'), 'PerdidaPan')
+    verificar_normalidad(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PerdidaPan')

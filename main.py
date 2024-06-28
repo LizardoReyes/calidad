@@ -4,19 +4,21 @@ import pandas as pd
 
 from scripts.anova_1_factor import anova_1_factor
 from scripts.anova_1_factor_2 import anova_1_factor_2
+from scripts.kruskal_wallis import prueba_kruskal
 from scripts.normalidad import verificar_normalidad
 from scripts.normalidad2 import verificar_normalidad_2
 
 if __name__ == '__main__':
-    '''
-    # Prueba de normalidad Shapiro-Wilk
-    print("\nPrueba de normalidad Shapiro-Wilk\n")
-    verificar_normalidad(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
 
+    """
     # Prueba de normalidad Kolmogorov-Smirnov
     print("\nPrueba de normalidad Kolmogorov-Smirnov\n")
     verificar_normalidad_2(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
-    '''
+
+    # Prueba de normalidad Shapiro-Wilk
+    print("\nPrueba de normalidad Shapiro-Wilk\n")
+    verificar_normalidad(os.path.join(os.getcwd(), './datos/', 'archivo.xlsx'), 'PanesDefecto')
+    """
 
 
     '''
